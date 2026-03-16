@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include pyproject.toml
+recursive-include src/django_agent_rag/migrations *.py
+recursive-include src/django_agent_rag *.typed
+recursive-exclude * __pycache__
+recursive-exclude * *.py[cod]
+

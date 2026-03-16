@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-agent-rag"
+version = "0.1.0"
+description = "Installable RAG infrastructure for Django projects."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [
+  { name = "django-agent-rag contributors" }
+]
+maintainers = [
+  { name = "django-agent-rag contributors" }
+]
+keywords = ["django", "rag", "llm", "pgvector", "retrieval"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Web Environment",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Database",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "Django>=4.2,<6.0",
+  "pgvector>=0.3.6",
+  "psycopg[binary]>=3.1",
+]
+
+[project.scripts]
+django-agent-rag-temporal-worker = "django_agent_rag.temporal_worker:main"
+
+[project.optional-dependencies]
+openai = ["openai>=1.30.0"]
+anthropic = ["anthropic>=0.34.0"]
+celery = ["celery>=5.3"]
+temporal = ["temporalio>=1.6.0"]
+dev = [
+  "build>=1.2.1",
+  "coverage[toml]>=7.6",
+  "twine>=5.1",
+  "pytest>=8.2",
+  "pytest-django>=4.8",
+  "ruff>=0.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/example/django-agent-rag"
+Repository = "https://github.com/example/django-agent-rag"
+Issues = "https://github.com/example/django-agent-rag/issues"
+
+[tool.setuptools]
+include-package-data = true
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+django_agent_rag = ["py.typed"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+branch = true
+source = ["django_agent_rag"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "DJ"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__/*", "*.py[cod]"]
