@@ -237,6 +237,34 @@ See [`examples/demo_project`](examples/demo_project) for a minimal Django projec
 
 ## Publishing to PyPI
 
+This repository publishes with PyPI Trusted Publishing using GitHub Actions OIDC. The publish workflow is:
+
+- `.github/workflows/python-publish.yml`
+
+Publishing is triggered when a GitHub Release is published, and it can also be run manually with `workflow_dispatch`.
+Only the `publish` job gets `id-token: write`. The `build` job keeps minimal permissions.
+
+Before publishing, PyPI must be configured with a trusted publisher that exactly matches:
+
+- GitHub owner: `akamad007`
+- repository name: `django-agent-rag`
+- workflow filename: `.github/workflows/python-publish.yml`
+- environment name: `pypi`
+
+If any of those do not match, PyPI will reject the publish request.
+
+Maintainer flow:
+
 1. Update the version in `pyproject.toml`.
 2. Run `make check-dist`.
-3. Upload `dist/*` with Twine, or use the included GitHub Actions publishing workflow with PyPI trusted publishing.
+3. Push the version change.
+4. Create a GitHub Release to trigger publishing.
+
+Maintainer notes:
+
+- The workflow file path must exactly match what is configured on PyPI.
+- Reusable GitHub workflows cannot currently be used as the trusted workflow for PyPI Trusted Publishing.
+- Environment mismatches can cause publish failures.
+- Stale package references should point to `django-agent-rag`, including the PyPI project URL: `https://pypi.org/project/django-agent-rag/`.
+
+See [PUBLISHING.md](PUBLISHING.md) for the short maintainer checklist.

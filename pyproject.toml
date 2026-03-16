@@ -54,9 +54,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/django-agent-rag"
-Repository = "https://github.com/example/django-agent-rag"
-Issues = "https://github.com/example/django-agent-rag/issues"
+Homepage = "https://github.com/akamad007/django-agent-rag"
+Repository = "https://github.com/akamad007/django-agent-rag"
+Issues = "https://github.com/akamad007/django-agent-rag/issues"
+PyPI = "https://pypi.org/project/django-agent-rag/"
 
 [tool.setuptools]
 include-package-data = true
