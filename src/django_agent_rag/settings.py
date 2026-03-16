@@ -9,7 +9,6 @@ from django.utils.module_loading import import_string
 
 from django_agent_rag.exceptions import ConfigurationError
 
-
 DEFAULTS: dict[str, Any] = {
     "VECTOR_STORE_CLASS": "django_agent_rag.retrievers.pgvector.PGVectorRetriever",
     "EMBEDDING_BACKEND": "django_agent_rag.backends.embeddings.fake.FakeEmbeddingBackend",
@@ -89,4 +88,3 @@ def optional_module_available(module_name: str) -> bool:
     except Exception:
         return False
     return True
-

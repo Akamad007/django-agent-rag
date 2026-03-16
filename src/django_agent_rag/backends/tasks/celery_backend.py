@@ -8,14 +8,20 @@ from django_agent_rag.settings import optional_module_available
 class CeleryTaskBackend(TaskBackend):
     def __init__(self) -> None:
         if not optional_module_available("celery"):
-            raise OptionalDependencyMissing("Celery support requires installing django-agent-rag[celery].")
+            raise OptionalDependencyMissing(
+                "Celery support requires installing django-agent-rag[celery]."
+            )
 
     def enqueue_document_ingestion(self, document_id: int) -> None:
         from django_agent_rag.celery_tasks import process_document_ingestion
 
         process_document_ingestion.delay(document_id)
 
-    def enqueue_embedding(self, document_id: int | None = None, chunk_ids: list[int] | None = None) -> None:
+    def enqueue_embedding(
+        self,
+        document_id: int | None = None,
+        chunk_ids: list[int] | None = None,
+    ) -> None:
         from django_agent_rag.celery_tasks import process_document_embedding
 
         process_document_embedding.delay(document_id=document_id, chunk_ids=chunk_ids)
@@ -27,4 +33,3 @@ class CeleryTaskBackend(TaskBackend):
 
     def backend_name(self) -> str:
         return "celery"
-

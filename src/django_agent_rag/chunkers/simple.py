@@ -31,7 +31,12 @@ class SimpleChunker(Chunker):
             index += 1
         if not payloads and text == "":
             payloads.append(
-                ChunkPayload(text="", chunk_index=0, char_length=0, token_length=0, metadata={"start": 0, "end": 0})
+                ChunkPayload(
+                    text="",
+                    chunk_index=0,
+                    char_length=0,
+                    token_length=0,
+                    metadata={"start": 0, "end": 0},
+                )
             )
         return payloads
-

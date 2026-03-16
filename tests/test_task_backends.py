@@ -13,7 +13,10 @@ def test_sync_backend_name():
 
 
 def test_celery_backend_smoke():
-    with patch("django_agent_rag.backends.tasks.celery_backend.optional_module_available", return_value=True):
+    with patch(
+        "django_agent_rag.backends.tasks.celery_backend.optional_module_available",
+        return_value=True,
+    ):
         backend = CeleryTaskBackend()
         with patch("django_agent_rag.celery_tasks.process_document_reindex") as task:
             task.delay = MagicMock()
@@ -22,7 +25,9 @@ def test_celery_backend_smoke():
 
 
 def test_temporal_backend_requires_optional_dependency():
-    with patch("django_agent_rag.backends.tasks.temporal_backend.optional_module_available", return_value=False):
+    with patch(
+        "django_agent_rag.backends.tasks.temporal_backend.optional_module_available",
+        return_value=False,
+    ):
         with pytest.raises(OptionalDependencyMissing):
             TemporalTaskBackend()
-

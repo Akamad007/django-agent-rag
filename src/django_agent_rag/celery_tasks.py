@@ -19,7 +19,10 @@ def process_document_ingestion(document_id: int) -> None:
 
 
 @shared_task
-def process_document_embedding(document_id: int | None = None, chunk_ids: list[int] | None = None) -> None:
+def process_document_embedding(
+    document_id: int | None = None,
+    chunk_ids: list[int] | None = None,
+) -> None:
     from django_agent_rag.services import embed_document
 
     if document_id is None:
@@ -32,4 +35,3 @@ def process_document_reindex(document_id: int) -> None:
     from django_agent_rag.services import reindex_document
 
     reindex_document(document_id)
-

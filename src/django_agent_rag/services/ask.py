@@ -3,7 +3,11 @@ from __future__ import annotations
 import time
 
 from django_agent_rag.models import AgentRun, RetrievalRun
-from django_agent_rag.services.ingestion import get_embedding_backend, get_llm_backend, get_task_backend
+from django_agent_rag.services.ingestion import (
+    get_embedding_backend,
+    get_llm_backend,
+    get_task_backend,
+)
 from django_agent_rag.services.retrieval import retrieve_context
 
 

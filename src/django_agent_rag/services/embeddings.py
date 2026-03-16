@@ -18,7 +18,9 @@ def embed_document(document_id: int, chunk_ids: list[int] | None = None) -> list
         chunk.vector = vector
         chunk.embedding_status = Chunk.EmbeddingStatus.READY
         chunk.embedding_provider = backend.provider_name()
-    Chunk.objects.bulk_update(chunks, ["vector", "embedding_status", "embedding_provider", "updated_at"])
+    Chunk.objects.bulk_update(
+        chunks,
+        ["vector", "embedding_status", "embedding_provider", "updated_at"],
+    )
     Document.objects.filter(id=document_id).update(status=Document.Status.READY)
     return chunks
-

@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 
 import pytest
-from django.conf import settings
 
 
 def pytest_collection_modifyitems(config, items):
@@ -18,4 +17,3 @@ def pytest_collection_modifyitems(config, items):
 def rag_settings(settings):
     settings.DJANGO_AGENT_RAG = settings.DJANGO_AGENT_RAG.copy()
     return settings.DJANGO_AGENT_RAG
-

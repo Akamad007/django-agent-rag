@@ -7,7 +7,7 @@ name = "django-agent-rag"
 version = "0.1.0"
 description = "Installable RAG infrastructure for Django projects."
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
 requires-python = ">=3.11"
 authors = [
   { name = "django-agent-rag contributors" }
@@ -23,7 +23,6 @@ classifiers = [
   "Framework :: Django :: 4.2",
   "Framework :: Django :: 5.0",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
@@ -85,6 +84,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "DJ"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/django_agent_rag/migrations/*.py" = ["E501", "I001"]
 
 [tool.ruff.format]
 quote-style = "double"

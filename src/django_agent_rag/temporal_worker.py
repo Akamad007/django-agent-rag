@@ -14,7 +14,13 @@ async def run_worker() -> None:
 
     from django_agent_rag.temporal import DocumentWorkflow, process_document_activity
 
-    client = await Client.connect(getattr(settings, "TEMPORAL_ADDRESS", os.getenv("TEMPORAL_ADDRESS", "localhost:7233")))
+    client = await Client.connect(
+        getattr(
+            settings,
+            "TEMPORAL_ADDRESS",
+            os.getenv("TEMPORAL_ADDRESS", "localhost:7233"),
+        )
+    )
     config = get_app_settings()
     worker = Worker(
         client,
@@ -27,4 +33,3 @@ async def run_worker() -> None:
 
 def main() -> None:
     asyncio.run(run_worker())
-

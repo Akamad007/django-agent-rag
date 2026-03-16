@@ -30,11 +30,20 @@ class Document(TimeStampedModel):
 
     external_id = models.CharField(max_length=255, blank=True, db_index=True)
     title = models.CharField(max_length=255)
-    source_type = models.CharField(max_length=20, choices=SourceType.choices, default=SourceType.TEXT)
+    source_type = models.CharField(
+        max_length=20,
+        choices=SourceType.choices,
+        default=SourceType.TEXT,
+    )
     raw_text = models.TextField(blank=True)
     source_pointer = models.CharField(max_length=500, blank=True)
     metadata = models.JSONField(default=dict, blank=True)
-    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True)
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.PENDING,
+        db_index=True,
+    )
     checksum = models.CharField(max_length=128, blank=True, db_index=True)
 
     objects = DocumentManager()
@@ -110,6 +119,9 @@ class RetrievalRun(TimeStampedModel):
     error_message = models.TextField(blank=True)
     metadata = models.JSONField(default=dict, blank=True)
 
+    def __str__(self) -> str:
+        return f"RetrievalRun({self.id})"
+
 
 class AgentRun(TimeStampedModel):
     class Status(models.TextChoices):
@@ -130,3 +142,5 @@ class AgentRun(TimeStampedModel):
     error_message = models.TextField(blank=True)
     metadata = models.JSONField(default=dict, blank=True)
 
+    def __str__(self) -> str:
+        return f"AgentRun({self.id})"

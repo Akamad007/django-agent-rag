@@ -9,7 +9,11 @@ class TaskBackend(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def enqueue_embedding(self, document_id: int | None = None, chunk_ids: list[int] | None = None) -> None:
+    def enqueue_embedding(
+        self,
+        document_id: int | None = None,
+        chunk_ids: list[int] | None = None,
+    ) -> None:
         raise NotImplementedError
 
     @abstractmethod
@@ -19,4 +23,3 @@ class TaskBackend(ABC):
     @abstractmethod
     def backend_name(self) -> str:
         raise NotImplementedError
-

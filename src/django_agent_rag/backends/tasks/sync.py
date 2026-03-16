@@ -10,7 +10,11 @@ class SyncTaskBackend(TaskBackend):
         chunk_document(document_id)
         embed_document(document_id)
 
-    def enqueue_embedding(self, document_id: int | None = None, chunk_ids: list[int] | None = None) -> None:
+    def enqueue_embedding(
+        self,
+        document_id: int | None = None,
+        chunk_ids: list[int] | None = None,
+    ) -> None:
         from django_agent_rag.services import embed_document
 
         if document_id is None:
@@ -24,4 +28,3 @@ class SyncTaskBackend(TaskBackend):
 
     def backend_name(self) -> str:
         return "sync"
-

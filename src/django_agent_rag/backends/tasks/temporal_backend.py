@@ -12,13 +12,23 @@ from django_agent_rag.settings import get_app_settings, optional_module_availabl
 class TemporalTaskBackend(TaskBackend):
     def __init__(self) -> None:
         if not optional_module_available("temporalio.client"):
-            raise OptionalDependencyMissing("Temporal support requires installing django-agent-rag[temporal].")
+            raise OptionalDependencyMissing(
+                "Temporal support requires installing django-agent-rag[temporal]."
+            )
 
     def enqueue_document_ingestion(self, document_id: int) -> None:
         self._start_workflow("document_ingestion", document_id=document_id)
 
-    def enqueue_embedding(self, document_id: int | None = None, chunk_ids: list[int] | None = None) -> None:
-        self._start_workflow("document_embedding", document_id=document_id, chunk_ids=chunk_ids or [])
+    def enqueue_embedding(
+        self,
+        document_id: int | None = None,
+        chunk_ids: list[int] | None = None,
+    ) -> None:
+        self._start_workflow(
+            "document_embedding",
+            document_id=document_id,
+            chunk_ids=chunk_ids or [],
+        )
 
     def enqueue_reindex(self, document_id: int) -> None:
         self._start_workflow("document_reindex", document_id=document_id)
@@ -42,4 +52,3 @@ class TemporalTaskBackend(TaskBackend):
             id=workflow_id,
             task_queue=cfg.temporal_task_queue,
         )
-

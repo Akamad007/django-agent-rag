@@ -3,8 +3,8 @@ from __future__ import annotations
 from django.db import transaction
 
 from django_agent_rag.models import Chunk, Document
-from django_agent_rag.settings import get_app_settings
 from django_agent_rag.services.ingestion import get_chunker
+from django_agent_rag.settings import get_app_settings
 
 
 @transaction.atomic
@@ -31,4 +31,3 @@ def chunk_document(document_id: int) -> list[Chunk]:
     ]
     created = Chunk.objects.bulk_create(chunks)
     return created
-

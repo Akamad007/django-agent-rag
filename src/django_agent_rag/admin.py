@@ -34,7 +34,15 @@ def soft_delete_documents(_modeladmin, _request, queryset):
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "external_id", "source_type", "status", "chunk_count", "updated_at")
+    list_display = (
+        "id",
+        "title",
+        "external_id",
+        "source_type",
+        "status",
+        "chunk_count",
+        "updated_at",
+    )
     search_fields = ("title", "external_id", "status")
     list_filter = ("source_type", "status", "created_at", "updated_at")
     actions = [enqueue_reindex, enqueue_reembed, delete_chunks, soft_delete_documents]
@@ -46,7 +54,14 @@ class DocumentAdmin(admin.ModelAdmin):
 
 @admin.register(Chunk)
 class ChunkAdmin(admin.ModelAdmin):
-    list_display = ("id", "document", "chunk_index", "embedding_status", "embedding_provider", "updated_at")
+    list_display = (
+        "id",
+        "document",
+        "chunk_index",
+        "embedding_status",
+        "embedding_provider",
+        "updated_at",
+    )
     search_fields = ("document__title", "document__external_id", "text")
     list_filter = ("embedding_status", "embedding_provider", "updated_at")
 
@@ -69,4 +84,3 @@ class AgentRunAdmin(admin.ModelAdmin):
     list_display = ("id", "query", "llm_provider", "status", "created_at")
     search_fields = ("query", "llm_provider", "status")
     list_filter = ("status", "llm_provider", "created_at")
-
